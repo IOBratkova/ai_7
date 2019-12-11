@@ -13,6 +13,17 @@ class Frame:
                and self.parent == other.parent \
                and self.slots == other.slots
 
+    """
+     Делает строку из списка слотов.
+     slotType - тип пришедшего в метод слота.
+     В зависимости от типа возвращает его значение (см классы).
+     Если натыкается на ListSlot, то выписывает последовательно значения name из него.
+     Если натыкатеся на FrameSlot, то выписывает имя фрейма, которое в нем лежит.
+     Возвращает Нет, если в слоте нет значения или произошла ошибка.
+     return 'Нет' if s is None else s.__str__() 
+     последнее нужно для того, чтобы преобразовать ответ в строку. 
+    """
+
     def slotsToString(self, oneSlot):
         slotType = type(oneSlot)
         try:
@@ -24,7 +35,7 @@ class Frame:
                 s = oneSlot.frame.name
             elif slotType == ListSlot:
                 s = ''
-                for element in oneSlot:
+                for element in oneSlot.array:
                     s += element.name + ', '
                 s = s[0: -2]
             else:
@@ -33,15 +44,20 @@ class Frame:
             s = 'Нет'
         return 'Нет' if s is None else s.__str__()
 
+    """
+    Превращаем фрейм в строку. 
+    Последоватеьно перебирает слоты фрейма и преобразует каждый из них в строку (см выше).
+    Записывает имя фрейма-родителя, если он есть, иначе пишет Нет.
+    Возвращает в порядке 
+    Название: <текст>, родитель: <текст>, слоты: [<слот1=значение>,..., <слотN=значение>]
+    """
+
     def frameToString(self):
         slots = ''
         for slot in self.slots:
             s = self.slotsToString(slot)
             slots += slot.name + ' = ' + s + ', '
-
-
         slots = slots[0: -2]
-
         if self.parent is None:
             tmp = 'Нет'
         else:
@@ -50,6 +66,7 @@ class Frame:
                ', родитель: ' + tmp + \
                ', слоты: [' + slots + ']'
 
+
 # Указатель типа наследия
 class InheritanceIndex(enum.Enum):
     s = 0  # (тот же) - слот наследуется с теми же значениями данных;
@@ -57,7 +74,7 @@ class InheritanceIndex(enum.Enum):
     i = 2  # (независимый) - слот не наследуется.
 
 
-#  Класс Слот
+#  Класс Слот.  Конструктор и метод сравнения
 class Slot:
     def __init__(self, name, inherit):
         self.name = name
@@ -68,15 +85,24 @@ class Slot:
 
 
 # Текстовый слот. Текстовая информация
+# В остальных классах все аналогично
 class TextSlot(Slot):
+
+    # Конструктор
+    # Сначала вызов конструктора бати: Slot.__init__(self, name, inherit)
+    # А потом конкретно наши значения self.text = text, self.lisps = []
     def __init__(self, name, inherit, text):
         Slot.__init__(self, name, inherit)
         self.text = text
         self.lisps = []
 
+    # Сравнение очень похоже на конструктор
+    # Сначала вызываем сравнение бати: Slot.__eq__(self, other)
+    # А потом свои собственные сравнения: self.lisps == other.lisps and self.text == other.text
     def __eq__(self, other):
-        #return self.__eq__(other) and  self.lisps == other.lisps and self.text == other.text
-        return Slot.__eq__(self, other) and self.lisps == other.lisps and self.text == other.text
+        return Slot.__eq__(self, other) \
+               and self.lisps == other.lisps \
+               and self.text == other.text
 
 
 # Атом. Переменная
@@ -111,6 +137,7 @@ class FrameSlot(Slot):
     def __eq__(self, other):
         return Slot.__eq__(self, other) and self.lisps == other.lisps and self.frame == other.frame
 
+
 # Лисп-слот. присоединенная процедура
 class LispSlot(Slot):
     def __init__(self, name, inherit, lsp):
@@ -119,5 +146,3 @@ class LispSlot(Slot):
 
     def __eq__(self, other):
         return Slot.__eq__(self, other) and self.lsp == other.lsp
-
-
