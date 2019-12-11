@@ -17,7 +17,7 @@ frames.append(doctorFrame) # frames[1]
 volkovaFrame = Frame('Волкова', frames[1])
 experience = 40
 speciality = 'кардиолог'
-datetime = 'пнд-птн'
+datetime = 'пн-пт'
 volkovaFrame.slots.append(AtomSlot('стаж', InheritanceIndex.u, experience))
 volkovaFrame.slots.append(TextSlot('специальность', InheritanceIndex.u, speciality))
 volkovaFrame.slots.append(TextSlot('прием', InheritanceIndex.u, datetime))
@@ -26,7 +26,7 @@ frames.append(volkovaFrame) # frames[2]
 novikovFrame = Frame('Новиков', frames[1])
 experience = 10
 speciality = 'лор'
-datetime = 'ср-вск'
+datetime = 'ср-вс'
 novikovFrame.slots.append(AtomSlot('стаж', InheritanceIndex.u, experience))
 novikovFrame.slots.append(TextSlot('специальность', InheritanceIndex.u, speciality))
 novikovFrame.slots.append(TextSlot('прием', InheritanceIndex.u, datetime))
