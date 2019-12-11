@@ -14,11 +14,17 @@ class Frame:
                and self.slots == other.slots
 
     def frameToString(self):
+        slots = ''
+        for slot in self.slots:
+            slots += slot.name + ', '
+        slots = slots[0: -2]
         if self.parent is None:
             tmp = 'Нет'
         else:
             tmp = self.parent.name
-        return 'Название: ' + self.name + ', родитель: ' + tmp
+        return 'Название: ' + self.name + \
+               ', родитель: ' + tmp + \
+               ', слоты: [' + slots + ']'
 
 # Указатель типа наследия
 class InheritanceIndex(enum.Enum):
