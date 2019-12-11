@@ -18,5 +18,5 @@ doctor.slots.append(AtomSlot('Стаж', InheritanceIndex.u, ''))
 frames.append(doctor)
 
 # конкретный врач
-мщд
+doctor1 = Frame()
 
