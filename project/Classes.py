@@ -13,11 +13,35 @@ class Frame:
                and self.parent == other.parent \
                and self.slots == other.slots
 
+    def slotsToString(self, oneSlot):
+        slotType = type(oneSlot)
+        try:
+            if slotType == AtomSlot:
+                s = oneSlot.atom
+            elif slotType == TextSlot:
+                s = oneSlot.text
+            elif slotType == FrameSlot:
+                s = oneSlot.frame.name
+            elif slotType == ListSlot:
+                s = ''
+                for element in oneSlot:
+                    s += element.name + ', '
+                s = s[0: -2]
+            else:
+                s = 'Нет'
+        except Exception:
+            s = 'Нет'
+        return 'Нет' if s is None else s.__str__()
+
     def frameToString(self):
         slots = ''
         for slot in self.slots:
-            slots += slot.name + ', '
+            s = self.slotsToString(slot)
+            slots += slot.name + ' = ' + s + ', '
+
+
         slots = slots[0: -2]
+
         if self.parent is None:
             tmp = 'Нет'
         else:
