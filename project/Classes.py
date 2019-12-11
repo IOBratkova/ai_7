@@ -9,8 +9,16 @@ class Frame:
         self.parent = parent
 
     def __eq__(self, other):
-        return self.name == other.name and self.parent == other.parent and self.slots == other.slots
+        return self.name == other.name \
+               and self.parent == other.parent \
+               and self.slots == other.slots
 
+    def frameToString(self):
+        if self.parent is None:
+            tmp = 'Нет'
+        else:
+            tmp = self.parent.name
+        return 'Название: ' + self.name + ', родитель: ' + tmp
 
 # Указатель типа наследия
 class InheritanceIndex(enum.Enum):
