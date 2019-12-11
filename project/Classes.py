@@ -8,6 +8,9 @@ class Frame:
         self.slots = []
         self.parent = parent
 
+    def __eq__(self, other):
+        return self.name == other.name and self.parent == other.parent and self.slots == other.slots
+
 
 # Указатель типа наследия
 class InheritanceIndex(enum.Enum):
@@ -22,6 +25,9 @@ class Slot:
         self.name = name
         self.inherit = inherit
 
+    def __eq__(self, other):
+        return self.name == other.name and self.inherit == other.inherit
+
 
 # Текстовый слот. Текстовая информация
 class TextSlot(Slot):
@@ -29,6 +35,10 @@ class TextSlot(Slot):
         Slot.__init__(self, name, inherit)
         self.text = text
         self.lisps = []
+
+    def __eq__(self, other):
+        #return self.__eq__(other) and  self.lisps == other.lisps and self.text == other.text
+        return Slot.__eq__(self, other) and self.lisps == other.lisps and self.text == other.text
 
 
 # Атом. Переменная
@@ -38,6 +48,9 @@ class AtomSlot(Slot):
         self.atom = atom
         self.lisps = []
 
+    def __eq__(self, other):
+        return Slot.__eq__(self, other) and self.lisps == other.lisps and self.atom == other.atom
+
 
 # Список
 class ListSlot(Slot):
@@ -45,6 +58,9 @@ class ListSlot(Slot):
         Slot.__init__(self, name, inherit)
         self.array = array
         self.lisps = []
+
+    def __eq__(self, other):
+        return Slot.__eq__(self, other) and self.lisps == other.lisps and self.array == other.array
 
 
 # Фрейм-слот. указывает имя фрейма верхнего уровня
@@ -54,6 +70,8 @@ class FrameSlot(Slot):
         self.frame = frame
         self.lisps = []
 
+    def __eq__(self, other):
+        return Slot.__eq__(self, other) and self.lisps == other.lisps and self.frame == other.frame
 
 # Лисп-слот. присоединенная процедура
 class LispSlot(Slot):
@@ -61,5 +79,7 @@ class LispSlot(Slot):
         Slot.__init__(self, name, inherit)
         self.lsp = lsp
 
+    def __eq__(self, other):
+        return Slot.__eq__(self, other) and self.lsp == other.lsp
 
 

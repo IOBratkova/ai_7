@@ -1,10 +1,11 @@
+from DataBase import frames
+
 print('Hello, Im frame-program')
 
-from Basic import frames
 
-frames[0].print_frame()
-
-
+j = 0
+for frame in frames:
+    j += 1
 
 """
 class A:
