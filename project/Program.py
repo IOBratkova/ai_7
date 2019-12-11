@@ -2,9 +2,10 @@ from DataBase import frames
 
 print('Hello, Im frame-program')
 
-
 j = 0
 for frame in frames:
+    s = frame.frameToString()
+    print(j, ' ', s)
     j += 1
 
 """
