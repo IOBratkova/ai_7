@@ -34,7 +34,7 @@ class TextSlot(Slot):
         self.lisps = []
 
     def print_slot(self):
-        s = self.name + ", " + self.text
+        return self.name + ", " + self.text
 
 
 # Атом. Переменная
@@ -45,7 +45,7 @@ class AtomSlot(Slot):
         self.lisps = []
 
     def print_slot(self):
-        s = self.name + ", " + self.atom
+        return self.name + ", " + self.atom
 
 
 # Список
@@ -62,20 +62,19 @@ class ListSlot(Slot):
         return s
 
     def print_slot(self):
-        s = self.array_to_text(self)
-        return s
+        return self.array_to_text(self)
 
 
 # Фрейм-слот. указывает имя фрейма верхнего уровня
 class FrameSlot(Slot):
     def __init__(self, name, inherit, frame):
         Slot.__init__(self, name, inherit)
-        self.frame = frame
         self.lisps = []
 
     def print_slot(self):
         return self.print_slot(self.frame)
 
+        self.frame = frame
 
 # Лисп-слот. присоединенная процедура
 class LispSlot(Slot):

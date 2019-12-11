@@ -37,10 +37,8 @@ doctor2.slots.append(AtomSlot('Стаж', InheritanceIndex.u, 25))
 frames.append(doctor2)
 
 # Больница Неболит
-"""
 index = frames.index(hospital)
 nopain = Frame('Неболит', frames[index])
 nopain.slots.append('адрес', InheritanceIndex.u, 'ул. Городская, дом 55')
 nopain.slots.append('врачи', InheritanceIndex.u, [doctor1, doctor2])
-"""
 
