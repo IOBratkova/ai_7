@@ -1,22 +1,22 @@
-from Classes import Frame, TextSlot, InheritanceIndex, ListSlot
+from Classes import Frame, TextSlot, InheritanceIndex, ListSlot, AtomSlot
 
 frames = []
 
-# Фрейм Больница
-# Название
-# Адрес
-tmpFrame = Frame('Больница')  # Первый фрейм больница
-tmpFrame.slots.append(TextSlot('адрес', InheritanceIndex.u, ''))
-tmpFrame.slots.append(TextSlot('название', InheritanceIndex.u, ''))
-tmpFrame.slots.append(ListSlot('врачи', InheritanceIndex.u, ''))
+# Фрейм Больница: Название, Адрес
+hospital = Frame('Больница')  # Первый фрейм больница
+hospital.slots.append(TextSlot('адрес', InheritanceIndex.u, ''))
+hospital.slots.append(TextSlot('название', InheritanceIndex.u, ''))
+hospital.slots.append(ListSlot('врачи', InheritanceIndex.u, ''))
+frames.append(hospital)
 
-# Добавляем больницу в список фреймов
-frames.append(frames)
+# Фрейм Врач: Имя, специализация, дни приема, стаж
+doctor = Frame('Врач')
+doctor.slots.append(TextSlot('Имя', InheritanceIndex.u, ''))
+doctor.slots.append(TextSlot('Специализация', InheritanceIndex.u, ''))
+doctor.slots.append(TextSlot('Дни приема', InheritanceIndex.u, ''))
+doctor.slots.append(AtomSlot('Стаж', InheritanceIndex.u, ''))
+frames.append(doctor)
 
-# Фрейм Неболит, родитель - больница
-# Название
-# Адрес
-# Список врачей
-tmpFrame = Frame('Неболит', frames[0])
-tmpFrame.slots.append(TextSlot('адрес', InheritanceIndex.u, 'ул. Городская, д. 74'))
-tmpFrame.slots.append(TextSlot('название', InheritanceIndex.u, 'Неболит'))
+# конкретный врач
+мщд
+
