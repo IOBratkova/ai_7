@@ -1,5 +1,9 @@
 print('Hello, Im frame-program')
 
+from Basic import frames
+
+frames[0].print_frame()
+
 
 
 """
