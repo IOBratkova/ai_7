@@ -1,8 +1,12 @@
 from Classes import Frame, TextSlot, InheritanceIndex, ListSlot, AtomSlot, FrameSlot
 
 
-def updateInfo():
-    return 'Update!'
+def updateInfoDate():
+    return 'дата талона изменена'
+
+
+def updateInfoTime():
+    return 'время талона изменено'
 
 
 # Список фреймов
@@ -72,11 +76,12 @@ frames.append(nopainFrame)  # frames[4]
 
 # Фрейм Талон: время, врач, дата
 talonFrame = Frame('Талон')
-talonFrame.slots.append(TextSlot('дата', InheritanceIndex.u, None))
-talonFrame.slots.append(TextSlot('время', InheritanceIndex.u, None))
+dateLisp = updateInfoDate
+timeLisp = updateInfoTime
+talonFrame.slots.append(TextSlot('дата', InheritanceIndex.u, None, dateLisp))
+talonFrame.slots.append(FrameSlot('пациент', InheritanceIndex.i, None))
+talonFrame.slots.append(TextSlot('время', InheritanceIndex.u, None, timeLisp))
 talonFrame.slots.append(FrameSlot('врач', InheritanceIndex.u, None))
-lisp = updateInfo
-talonFrame.slots[0].lisps = lisp
 frames.append(talonFrame)  # frames[5]
 
 # Фрейм Пациент: талон
@@ -89,11 +94,11 @@ talon237Frame = Frame('Талон237', frames[5])
 date = '02.02.2020'
 time = '10:30'
 doctor = frames[2]
-talon237Frame.slots.append(TextSlot('дата', InheritanceIndex.u, date))
-talon237Frame.slots.append(TextSlot('время', InheritanceIndex.u, time))
+dateLisp = updateInfoDate
+timeLisp = updateInfoTime
+talon237Frame.slots.append(TextSlot('дата', InheritanceIndex.u, date, dateLisp))
+talon237Frame.slots.append(TextSlot('время', InheritanceIndex.u, time, timeLisp))
 talon237Frame.slots.append(FrameSlot('врач', InheritanceIndex.u, doctor))
-lisp = updateInfo
-talon237Frame.slots[0].lisps.append(lisp)
 frames.append(talon237Frame)  # frames[7]
 
 # Фрейм Талон217: дата, время, врач
@@ -101,11 +106,13 @@ talon217Frame = Frame('Талон217', frames[5])
 time = '11:30'
 doctor = frames[3]
 date = '02.02.2020'
-talon217Frame.slots.append(TextSlot('дата', InheritanceIndex.u, date))
-talon217Frame.slots.append(TextSlot('время', InheritanceIndex.u, time))
+dateLisp = updateInfoDate
+timeLisp = updateInfoTime
+talon217Frame.slots.append(TextSlot('дата', InheritanceIndex.u, date, dateLisp))
+talon217Frame.slots.append(TextSlot('время', InheritanceIndex.u, time, timeLisp))
 talon217Frame.slots.append(FrameSlot('врач', InheritanceIndex.u, doctor))
-lisp = updateInfo
-talon237Frame.slots[0].lisps = lisp
+# lisp = updateInfo
+# talon217Frame.slots[0].lisps = lisp
 frames.append(talon217Frame)  # frames[8]
 
 # Фрейм Костя: талон
@@ -121,3 +128,9 @@ marinaFrame.slots.append(FrameSlot('талон', InheritanceIndex.u, marinat))
 frames.append(marinaFrame)  # frames[10]
 
 fixFrames = frames
+
+index237 = frames.index(talon237Frame)
+frames[index237].slots.append(FrameSlot('пациент', InheritanceIndex.u, frames[9]))
+
+index217 = frames.index(talon217Frame)
+frames[index217].slots.append(FrameSlot('пациент', InheritanceIndex.u, frames[10]))

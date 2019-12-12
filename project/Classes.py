@@ -92,10 +92,11 @@ class TextSlot(Slot):
     # Конструктор
     # Сначала вызов конструктора бати: Slot.__init__(self, name, inherit)
     # А потом конкретно наши значения self.text = text, self.lisps = []
-    def __init__(self, name, inherit, text):
+    def __init__(self, name, inherit, text, lisp=None):
         Slot.__init__(self, name, inherit)
-        self.text = text
         self.lisps = []
+        self.text = text
+        self.lisps.append(lisp)
 
     # Сравнение очень похоже на конструктор
     # Сначала вызываем сравнение бати: Slot.__eq__(self, other)
