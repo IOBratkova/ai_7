@@ -20,6 +20,9 @@ def getFrame(frames_f, word):
     return None
 
 
+# ура гитигнор работает
+
+
 def getAnswerBySlot(frames_f, word1, word3):
     for frame_n in frames_f:
         if frame_n.name == word3:
