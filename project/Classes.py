@@ -39,10 +39,10 @@ class Frame:
                     s += element.name + ', '
                 s = s[0: -2]
             else:
-                s = 'Нет'
+                s = ''
         except Exception:
-            s = 'Нет'
-        return 'Нет' if s is None else s.__str__()
+            s = ''
+        return '' if s is None else s.__str__()
 
     """
     Превращаем фрейм в строку. 
@@ -56,15 +56,16 @@ class Frame:
         slots = ''
         for slot in self.slots:
             s = self.slotsToString(slot)
-            slots += slot.name + ' = ' + s + ', '
+            if s == '':
+                slots += slot.name + ', '
+            else:
+                slots += slot.name + ' = ' + s + ', '
         slots = slots[0: -2]
         if self.parent is None:
-            tmp = 'Нет'
+            tmp = self.name + ', слоты: [' + slots + ']'
         else:
-            tmp = self.parent.name
-        return 'Название: ' + self.name + \
-               ', родитель: ' + tmp + \
-               ', слоты: [' + slots + ']'
+            tmp = self.name + ', это: ' + self.parent.name + ', слоты: [' + slots + ']'
+        return tmp
 
 
 # Указатель типа наследия
