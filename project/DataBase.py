@@ -1,5 +1,10 @@
 from Classes import Frame, TextSlot, InheritanceIndex, ListSlot, AtomSlot, FrameSlot
 
+
+def updateInfo():
+    return 'Update!'
+
+
 # Список фреймов
 frames = []
 
@@ -8,7 +13,7 @@ frames = []
 hospitalFrame = Frame('Больница')
 # Записываем в табличку шаблоны строк без значений. Это адрес и список врачей.
 hospitalFrame.slots.append(TextSlot('адрес', InheritanceIndex.u, None))
-hospitalFrame.slots.append(ListSlot('врачи', InheritanceIndex.u, None))
+hospitalFrame.slots.append(ListSlot('доктора', InheritanceIndex.u, None))
 frames.append(hospitalFrame)  # frames[0]
 """
 Получили табличку такую:
@@ -70,6 +75,8 @@ talonFrame = Frame('Талон')
 talonFrame.slots.append(TextSlot('дата', InheritanceIndex.u, None))
 talonFrame.slots.append(TextSlot('время', InheritanceIndex.u, None))
 talonFrame.slots.append(FrameSlot('врач', InheritanceIndex.u, None))
+lisp = updateInfo
+talonFrame.slots[0].lisps = lisp
 frames.append(talonFrame)  # frames[5]
 
 # Фрейм Пациент: талон
@@ -85,6 +92,8 @@ doctor = frames[2]
 talon237Frame.slots.append(TextSlot('дата', InheritanceIndex.u, date))
 talon237Frame.slots.append(TextSlot('время', InheritanceIndex.u, time))
 talon237Frame.slots.append(FrameSlot('врач', InheritanceIndex.u, doctor))
+lisp = updateInfo
+talon237Frame.slots[0].lisps.append(lisp)
 frames.append(talon237Frame)  # frames[7]
 
 # Фрейм Талон217: дата, время, врач
@@ -95,6 +104,8 @@ date = '02.02.2020'
 talon217Frame.slots.append(TextSlot('дата', InheritanceIndex.u, date))
 talon217Frame.slots.append(TextSlot('время', InheritanceIndex.u, time))
 talon217Frame.slots.append(FrameSlot('врач', InheritanceIndex.u, doctor))
+lisp = updateInfo
+talon237Frame.slots[0].lisps = lisp
 frames.append(talon217Frame)  # frames[8]
 
 # Фрейм Костя: талон
@@ -108,3 +119,5 @@ marinaFrame = Frame('Марина', frames[6])
 marinat = frames[8]
 marinaFrame.slots.append(FrameSlot('талон', InheritanceIndex.u, marinat))
 frames.append(marinaFrame)  # frames[10]
+
+fixFrames = frames
