@@ -1,4 +1,5 @@
 from DataBase import frames
+from Func import getFrame, getAnswerBySlot, removeTalon
 """
 Что можно писать?
 + Стоп-слово: 'стоп' или 'stop'
@@ -55,6 +56,7 @@ while flag:
 
     # Если мы хотим изменить какие-то данные у конкретного талона. Работает только для времени и даты
     if len(question) == 7 and question[1] == 'изменить':
+        #Хочу изменить дата у Талон237 на ц892842904
         res = removeTalon(frames, question[4], question[6], question[2])
         print(res)
         continue

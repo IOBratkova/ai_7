@@ -134,3 +134,7 @@ frames[index237].slots.append(FrameSlot('пациент', InheritanceIndex.u, fr
 
 index217 = frames.index(talon217Frame)
 frames[index217].slots.append(FrameSlot('пациент', InheritanceIndex.u, frames[10]))
+
+"""
+Талон-Пациент, Пацинет-Талон
+"""
